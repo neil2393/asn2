@@ -1,0 +1,32 @@
+-- Database
+USE npate252assign2db;
+-- Query 1
+SELECT productDescription FROM products;
+-- Query 2
+SELECT DISTINCT city FROM customers;
+-- Query 3
+SELECT * FROM agents ORDER BY city;
+-- Query 4
+SELECT firstName, lastName FROM customers WHERE city = 'Springfield';
+-- Query 5
+SELECT lastName FROM customers WHERE agentId = 11;
+-- Query 6
+SELECT productDescription FROM products WHERE productDescription LIKE '%pad%' OR productDescription LIKE '%Pad%';
+-- Query 7
+SELECT customers.lastName, products.productDescription, purchases.quantity FROM customers, products, purchases WHERE purchases.customerId = customers.customerId AND purchases.productId = products.productId;
+-- Query 8 
+SELECT SUM(purchases.quantity) AS 'Homer''s Total Purchases' FROM purchases, customers WHERE customers.customerId = purchases.customerId AND customers.firstName = 'Homer';
+-- Query 9
+SELECT customers.firstName, customers.lastName, SUM(purchases.quantity) FROM purchases, customers WHERE customers.customerId = purchases.customerId GROUP BY customers.customerId;
+-- Query 10
+SELECT productDescription, itemsOnHand FROM products WHERE productId NOT IN (SELECT productId FROM purchases);
+-- Query 11
+SELECT productDescription, itemsOnHand FROM products WHERE productId NOT IN (SELECT purchases.productId FROM purchases, customers WHERE purchases.customerId = customers.customerId AND customers.firstName = 'Fred' AND customers.lastName = 'Flintstone');
+-- Query 12
+SELECT agents.firstName, agents.lastName, customers.firstName, customers.lastName FROM agents, customers WHERE customers.city = agents.city;
+-- Query 13
+SELECT SUM(quantity) AS 'Total # of Knee Pads Purchased' FROM purchases WHERE productId = 78;
+-- Query 14
+SELECT productDescription FROM products WHERE productId = (SELECT productId FROM (SELECT productId, count(customerId) AS purchaserNum FROM purchases GROUP BY product_id) AS purchaserCount WHERE purchaserNum > 3);
+-- Query 15
+SELECT firstName, lastName FROM agents WHERE agentId IN (SELECT agentId FROM customers, purchases WHERE purchases.customerId = customers.customerId AND purchases.productId = 78);
