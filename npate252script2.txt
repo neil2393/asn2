@@ -4,7 +4,7 @@ USE npate252assign2db;
 LOAD DATA LOCAL INFILE 'loaddatafall2018.txt' INTO TABLE products FIELDS TERMINATED BY ',' LINES TERMINATED BY '\n';
 -- Products
 INSERT INTO products(productId, productDescription, costPerItem, itemsOnHand) VALUES (66, 'Elbow pads', 14.25, 120);
-INSERT INTO products(productId, productDescription, costPerItem, itemsOnHand) VALUES (15, 'Knee pads', 25.00, 120);
+INSERT INTO products(productId, productDescription, costPerItem, itemsOnHand) VALUES (15, 'Sandals', 25.00, 120);
 -- Agents
 INSERT INTO agents(agentId, firstName, lastName, city, commissionPercentage) VALUES (99, 'Hugh', 'Grant', 'Springfield', 16);
 INSERT INTO agents(agentId, firstName, lastName, city, commissionPercentage) VALUES (22, 'Courtney', 'Cox', 'New York', 25);

@@ -8,7 +8,7 @@ INSERT INTO products(productId, productDescription, costPerItem, itemsOnHand) VA
 --------------
 
 --------------
-INSERT INTO products(productId, productDescription, costPerItem, itemsOnHand) VALUES (15, 'Knee pads', 25.00, 120)
+INSERT INTO products(productId, productDescription, costPerItem, itemsOnHand) VALUES (15, 'Sandals', 25.00, 120)
 --------------
 
 --------------
@@ -171,7 +171,7 @@ SELECT * FROM products
 productId	productDescription	costPerItem	itemsOnHand
 11	Bike	150	200
 12	Socks	2	100
-15	Knee pads	25	120
+15	Sandals	25	120
 66	Elbow pads	14.25	120
 78	Knee Pads	12.15	70
 88	Roller Blades	75	89
@@ -234,7 +234,7 @@ SELECT * FROM products
 productId	productDescription	costPerItem	itemsOnHand
 11	Bike	150	200
 12	Socks	2	100
-15	Knee pads	25	120
+15	Sandals	25	120
 66	Elbow pads	14.25	120
 78	Knee Pads	12.15	70
 88	Roller Blades	75	89
