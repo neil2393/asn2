@@ -66,7 +66,7 @@ SELECT * FROM agents;
 SELECT * FROM customers;
 SELECT * FROM products;
 SELECT * FROM purchases;
-Change the name of the Super Man customer to be Wonder Woman; you must do this by referencing both the firstname and lastname, NOT the Customer ID
+-- Change the name of the Super Man customer to be Wonder Woman; you must do this by referencing both the firstname and lastname, NOT the Customer ID
 UPDATE customers SET firstName='Wonder', lastName='Woman' WHERE firstName='Super' AND lastName='Man';
 -- Change the data so that in every product that Sideshow purchase was a quantity of 5; you must do this by referencing both the firstname of "Sideshow", NOT the Customer ID
 UPDATE purchases SET quantity=5 WHERE customerId=(SELECT customerId FROM customers WHERE firstName='Sideshow' AND lastName='Bob');
