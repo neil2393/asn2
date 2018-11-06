@@ -1,0 +1,20 @@
+-- Database
+USE npate252assign2db;
+-- Show the data in all your tables before doing the next steps
+SELECT * FROM agents;
+SELECT * FROM customers;
+SELECT * FROM purchases;
+SELECT * FROM products;
+-- Create a view that shows the customer first name and last name, the description of the products they have bought, the quantity of the products they have bought, the price of the product and a total cost to purchase that many items of each product. Order the view by the last name
+CREATE VIEW basic AS SELECT customers.firstName, customers.lastName, products.productDescription, purchases.quantity, products.costPerItem, products.costPerItem * purchases.quantity AS priceTotal FROM customers, products, purchases WHERE purchases.productId = products.productId and customers.customerId = purchases.customerId ORDER BY customers.lastName;
+-- Prove that your view works by selecting all the rows from it
+SELECT * FROM basic;
+-- Now select only the rows from the view (all columns from the view) where customers spent more than 100 dollars 
+SELECT * FROM basic WHERE priceTotal > 100;
+-- Delete the product that you made up using your product's description.
+DELETE FROM products WHERE productDescription = 'Sandals';
+-- Prove that the delete worked.
+SELECT * FROM products WHERE productDescription = 'Sandals';
+-- Delete all agents who are from Springfield  
+DELETE FROM agents WHERE city = 'Springfield';
+-- The row for Hugh Grant was not deleted because ON DELETE is set to RESTRICT. This means that because Hugh Grant was mentioned by a row in customers table, the agent cannot be deleted.
