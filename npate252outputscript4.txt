@@ -1,5 +1,5 @@
 Warning: Using a password on the command line interface can be insecure.
-ERROR 1451 (23000) at line 21: Cannot delete or update a parent row: a foreign key constraint fails (`npate252assign2db`.`customers`, CONSTRAINT `customers_ibfk_1` FOREIGN KEY (`agentId`) REFERENCES `agents` (`agentId`))
+ERROR 1451 (23000) at line 23: Cannot delete or update a parent row: a foreign key constraint fails (`npate252assign2db`.`customers`, CONSTRAINT `customers_ibfk_1` FOREIGN KEY (`agentId`) REFERENCES `agents` (`agentId`))
 --------------
 SELECT * FROM agents
 --------------
@@ -93,6 +93,12 @@ DELETE FROM products WHERE productDescription = 'Sandals'
 SELECT * FROM products WHERE productDescription = 'Sandals'
 --------------
 
+--------------
+SELECT * FROM agents WHERE city = 'Springfield'
+--------------
+
+firstName	lastName	city	commissionPercentage	agentId
+Hugh	Grant	Springfield	16	99
 --------------
 DELETE FROM agents WHERE city = 'Springfield'
 --------------

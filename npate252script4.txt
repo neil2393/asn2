@@ -17,6 +17,10 @@ SELECT * FROM products WHERE productDescription = 'Sandals';
 DELETE FROM products WHERE productDescription = 'Sandals';
 -- Prove that the delete worked.
 SELECT * FROM products WHERE productDescription = 'Sandals';
+-- Before deletion of agents from Springfield
+SELECT * FROM agents WHERE city = 'Springfield';
 -- Delete all agents who are from Springfield  
 DELETE FROM agents WHERE city = 'Springfield';
 -- The row for Hugh Grant was not deleted because ON DELETE is set to RESTRICT. This means that because Hugh Grant was mentioned by a row in customers table, the agent cannot be deleted.
+-- After deletion of agents from Springfield
+SELECT * FROM agents WHERE city = 'Springfield';
