@@ -1,5 +1,5 @@
 Warning: Using a password on the command line interface can be insecure.
-ERROR 1054 (42S22) at line 15: Unknown column 'product_description' in 'where clause'
+ERROR 1451 (23000) at line 21: Cannot delete or update a parent row: a foreign key constraint fails (`npate252assign2db`.`customers`, CONSTRAINT `customers_ibfk_1` FOREIGN KEY (`agentId`) REFERENCES `agents` (`agentId`))
 --------------
 SELECT * FROM agents
 --------------
@@ -80,6 +80,20 @@ Peter	Griffens	Elbow pads	19	14.25	270.75
 Homer	Simpson	Elbow pads	10	14.25	142.5
 Homer	Simpson	Helmet	20	29	580
 --------------
-SELECT * FROM products WHERE product_description = 'Sandals'
+SELECT * FROM products WHERE productDescription = 'Sandals'
+--------------
+
+productId	productDescription	costPerItem	itemsOnHand
+15	Sandals	25	120
+--------------
+DELETE FROM products WHERE productDescription = 'Sandals'
+--------------
+
+--------------
+SELECT * FROM products WHERE productDescription = 'Sandals'
+--------------
+
+--------------
+DELETE FROM agents WHERE city = 'Springfield'
 --------------
 

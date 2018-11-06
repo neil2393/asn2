@@ -12,7 +12,7 @@ SELECT * FROM basic;
 -- Now select only the rows from the view (all columns from the view) where customers spent more than 100 dollars 
 SELECT * FROM basic WHERE priceTotal > 100;
 -- Before deletion of product
-SELECT * FROM products WHERE product_description = 'Sandals';
+SELECT * FROM products WHERE productDescription = 'Sandals';
 -- Delete the product that you made up using your product's description.
 DELETE FROM products WHERE productDescription = 'Sandals';
 -- Prove that the delete worked.
