@@ -1,0 +1,100 @@
+Warning: Using a password on the command line interface can be insecure.
+--------------
+SHOW DATABASES
+--------------
+
+Database
+information_schema
+mysql
+npate252assign2db
+performance_schema
+--------------
+DROP DATABASE IF EXISTS npate252assign2db
+--------------
+
+--------------
+CREATE DATABASE npate252assign2db
+--------------
+
+--------------
+GRANT USAGE ON *.* TO 'ta'@'localhost'
+--------------
+
+--------------
+DROP USER 'ta'@'localhost'
+--------------
+
+--------------
+CREATE USER 'ta'@'localhost' IDENTIFIED BY 'cs3319'
+--------------
+
+--------------
+GRANT ALL PRIVILEGES ON yourwesternuseridassign2db.* TO 'ta'@'localhost'
+--------------
+
+--------------
+FLUSH PRIVILEGES
+--------------
+
+--------------
+SHOW TABLES
+--------------
+
+--------------
+CREATE TABLE agents (
+    firstName VARCHAR(20),
+    lastName VARCHAR(20),
+    city VARCHAR(20),
+    commissionPercentage INT,
+    agentId INT NOT NULL,
+    PRIMARY KEY (agentId)
+)
+--------------
+
+--------------
+CREATE TABLE customers (
+    firstName VARCHAR(20),
+    lastName VARCHAR(20),
+    city VARCHAR(20),
+    phoneNumber VARCHAR(20),
+    customerId INT NOT NULL,
+    agentId INT,
+    PRIMARY KEY (customerId),
+    FOREIGN KEY (agentId)
+        REFERENCES agents (agentId)
+        ON DELETE RESTRICT
+)
+--------------
+
+--------------
+CREATE TABLE products (
+    productId INT,
+    productDescription VARCHAR(20),
+    costPerItem FLOAT,
+    itemsOnHand INT,
+    PRIMARY KEY (productId)
+)
+--------------
+
+--------------
+CREATE TABLE purchases (
+    customerId INT NOT NULL,
+    productId INT NOT NULL,
+    quantity INT,
+    PRIMARY KEY (customerId , productId),
+    FOREIGN KEY (customerId)
+        REFERENCES customers (customerId),
+    FOREIGN KEY (productId)
+        REFERENCES products (productId)
+)
+--------------
+
+--------------
+SHOW TABLES
+--------------
+
+Tables_in_npate252assign2db
+agents
+customers
+products
+purchases
