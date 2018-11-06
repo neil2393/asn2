@@ -1,5 +1,4 @@
 Warning: Using a password on the command line interface can be insecure.
-ERROR 1054 (42S22) at line 30: Unknown column 'product_id' in 'group statement'
 --------------
 SELECT productDescription FROM products
 --------------
@@ -120,6 +119,15 @@ SELECT SUM(quantity) AS 'Total # of Knee Pads Purchased' FROM purchases WHERE pr
 Total # of Knee Pads Purchased
 7
 --------------
-SELECT productDescription FROM products WHERE productId = (SELECT productId FROM (SELECT productId, count(customerId) AS purchaserNum FROM purchases GROUP BY product_id) AS purchaserCount WHERE purchaserNum > 3)
+SELECT productDescription FROM products WHERE productId = (SELECT productId FROM (SELECT productId, count(customerId) AS purchaserNum FROM purchases GROUP BY productId) AS purchaserCount WHERE purchaserNum > 3)
 --------------
 
+productDescription
+Elbow pads
+--------------
+SELECT firstName, lastName FROM agents WHERE agentId IN (SELECT agentId FROM customers, purchases WHERE purchases.customerId = customers.customerId AND purchases.productId = 78)
+--------------
+
+firstName	lastName
+Regis	Philbin
+Rosie	ODonnell

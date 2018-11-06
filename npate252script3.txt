@@ -27,6 +27,6 @@ SELECT agents.firstName, agents.lastName, customers.firstName, customers.lastNam
 -- Query 13
 SELECT SUM(quantity) AS 'Total # of Knee Pads Purchased' FROM purchases WHERE productId = 78;
 -- Query 14
-SELECT productDescription FROM products WHERE productId = (SELECT productId FROM (SELECT productId, count(customerId) AS purchaserNum FROM purchases GROUP BY product_id) AS purchaserCount WHERE purchaserNum > 3);
+SELECT productDescription FROM products WHERE productId = (SELECT productId FROM (SELECT productId, count(customerId) AS purchaserNum FROM purchases GROUP BY productId) AS purchaserCount WHERE purchaserNum > 3);
 -- Query 15
 SELECT firstName, lastName FROM agents WHERE agentId IN (SELECT agentId FROM customers, purchases WHERE purchases.customerId = customers.customerId AND purchases.productId = 78);
