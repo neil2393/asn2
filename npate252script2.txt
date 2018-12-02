@@ -1,0 +1,79 @@
+-- Database
+USE npate252assign2db;
+-- Data file
+LOAD DATA LOCAL INFILE 'loaddatafall2018.txt' INTO TABLE products FIELDS TERMINATED BY ',' LINES TERMINATED BY '\n';
+-- Products
+INSERT INTO products(productId, productDescription, costPerItem, itemsOnHand) VALUES (66, 'Elbow pads', 14.25, 120);
+INSERT INTO products(productId, productDescription, costPerItem, itemsOnHand) VALUES (15, 'Sandals', 25.00, 120);
+-- Agents
+INSERT INTO agents(agentId, firstName, lastName, city, commissionPercentage) VALUES (99, 'Hugh', 'Grant', 'Springfield', 16);
+INSERT INTO agents(agentId, firstName, lastName, city, commissionPercentage) VALUES (22, 'Courtney', 'Cox', 'New York', 25);
+INSERT INTO agents(agentId, firstName, lastName, city, commissionPercentage)  VALUES (66, 'Rosie', 'ODonnell', 'Ottawa', 100);
+INSERT INTO agents(agentId, firstName, lastName, city, commissionPercentage) VALUES (33, 'David', 'Letterman', 'Bedrock', 100);
+INSERT INTO agents(agentId, firstName, lastName, city, commissionPercentage) VALUES (11, 'Regis', 'Philbin',  'Boston', 33);
+INSERT INTO agents(agentId, firstName, lastName, city, commissionPercentage)  VALUES (12, 'Rosie', 'Cox',  'Ottawa', 50);
+INSERT INTO agents(agentId, firstName, lastName, city, commissionPercentage) VALUES (84, 'Neil', 'Patel', 'Brampton', 100);
+-- Customers
+INSERT INTO customers(customerId, firstName, lastName, city, phoneNumber) VALUES (21, 'Homer', 'Simpson', 'Springfield', '686-8956');
+INSERT INTO customers(customerId, firstName, lastName, city, phoneNumber) VALUES (31, 'Sideshow', 'Bob', 'Springfield', '686-5555');
+INSERT INTO customers(customerId, firstName, lastName, city, phoneNumber) VALUES (12, 'Monty', 'Burns', 'Springfield', '789-0000');
+INSERT INTO customers(customerId, firstName, lastName, city, phoneNumber) VALUES (15, 'Fred', 'Flintstone', 'Bedrock', '777-2345');
+INSERT INTO customers(customerId, firstName, lastName, city, phoneNumber) VALUES (13, 'Super', 'Man', 'Kypto', '888-1234');
+INSERT INTO customers(customerId, firstName, lastName, city, phoneNumber) VALUES (10, 'Barney', 'Rubble', 'Bedrock', '777-1234');
+INSERT INTO customers(customerId, firstName, lastName, city, phoneNumber) VALUES (14, 'Peter', 'Griffens', 'Providence', '987-4567');
+-- Homer purchases
+INSERT INTO purchases(customerId, productId, quantity) VALUES (21, 99, 20);
+INSERT INTO purchases(customerId, productId, quantity) VALUES (21, 12, 14);
+INSERT INTO purchases(customerId, productId, quantity) VALUES (21, 66, 10);
+-- Slideshow purchases
+INSERT INTO purchases(customerId, productId, quantity) VALUES (31, 99, 1);
+INSERT INTO purchases(customerId, productId, quantity) VALUES (31, 12, 2);
+INSERT INTO purchases(customerId, productId, quantity) VALUES (31, 78, 4);
+INSERT INTO purchases(customerId, productId, quantity) VALUES (31, 66, 2);
+-- Fred purchases
+INSERT INTO purchases(customerId, productId, quantity) VALUES (15, 66, 2);
+INSERT INTO purchases(customerId, productId, quantity) VALUES (15, 78, 2);
+-- Peter purchases
+INSERT INTO purchases(customerId, productId, quantity) VALUES (14, 66, 19);
+-- Agent customer info
+-- Hugh Grant deals with Homer, Monty and Peter
+UPDATE customers 
+SET 
+    agentId = 99
+WHERE
+    customerId = 21 OR customerId = 12
+        OR customerId = 14;
+-- David Letterman deals with Super
+UPDATE customers 
+SET 
+    agentId = 33
+WHERE
+    customerId = 13;
+-- Regis Philbin deals with Barney and Fred
+UPDATE customers 
+SET 
+    agentId = 11
+WHERE
+    customerId = 10 OR customerId = 15;
+-- Rosie O'Donnell deals with Sideshow
+UPDATE customers 
+SET 
+    agentId = 66
+WHERE
+    customerId = 31;
+-- Now show all the data in each of the tables to prove that your inserts worked
+SELECT * FROM agents;
+SELECT * FROM customers;
+SELECT * FROM products;
+SELECT * FROM purchases;
+-- Change the name of the Super Man customer to be Wonder Woman; you must do this by referencing both the firstname and lastname, NOT the Customer ID
+UPDATE customers SET firstName='Wonder', lastName='Woman' WHERE firstName='Super' AND lastName='Man';
+-- Change the data so that in every product that Sideshow purchase was a quantity of 5; you must do this by referencing both the firstname of "Sideshow", NOT the Customer ID
+UPDATE purchases SET quantity=5 WHERE customerId=(SELECT customerId FROM customers WHERE firstName='Sideshow' AND lastName='Bob');
+-- Change it so that every customer that Regis deals with comes from the city of Boston; you must do this command using the first name of "Regis", not his agent id
+UPDATE customers SET city='Boston' WHERE agentId=(SELECT agentId FROM agents WHERE firstName='Regis' AND lastName='Philbin');
+-- Show the data again in all the tables to prove that your updates worked
+SELECT * FROM agents;
+SELECT * FROM customers;
+SELECT * FROM products;
+SELECT * FROM purchases;

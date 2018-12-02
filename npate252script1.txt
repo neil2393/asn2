@@ -1,0 +1,56 @@
+-- List all the current databases owned by you
+SHOW DATABASES;
+-- Delete the database called yourwesternuseridassign2db if it exists
+DROP DATABASE IF EXISTS npate252assign2db;
+-- Create a database called yourwesternuseridassign2db
+CREATE DATABASE npate252assign2db;
+-- Connect to (use) that database
+USE npate252assign2db;
+-- Add these lines to make sure the t.a. has access to your database in order t$
+GRANT USAGE ON *.* TO 'ta'@'localhost';
+DROP USER 'ta'@'localhost';
+CREATE USER 'ta'@'localhost' IDENTIFIED BY 'cs3319';
+GRANT ALL PRIVILEGES ON yourwesternuseridassign2db.* TO 'ta'@'localhost';
+FLUSH PRIVILEGES;
+-- List all the tables (should be none initially)
+SHOW TABLES;
+-- Create the tables you need to solve the problem above with the appropriate t$
+CREATE TABLE agents (
+    firstName VARCHAR(20),
+    lastName VARCHAR(20),
+    city VARCHAR(20),
+    commissionPercentage INT,
+    agentId INT NOT NULL,
+    PRIMARY KEY (agentId)
+);
+CREATE TABLE customers (
+    firstName VARCHAR(20),
+    lastName VARCHAR(20),
+    city VARCHAR(20),
+    phoneNumber VARCHAR(20),
+    customerId INT NOT NULL,
+    agentId INT,
+    PRIMARY KEY (customerId),
+    FOREIGN KEY (agentId)
+        REFERENCES agents (agentId)
+        ON DELETE RESTRICT
+);
+CREATE TABLE products (
+    productId INT NOT NULL,
+    productDescription VARCHAR(20),
+    costPerItem FLOAT,
+    itemsOnHand INT,
+    PRIMARY KEY (productId)
+);
+CREATE TABLE purchases (
+    customerId INT NOT NULL,
+    productId INT NOT NULL,
+    quantity INT,
+    PRIMARY KEY (customerId , productId),
+    FOREIGN KEY (customerId)
+        REFERENCES customers (customerId),
+    FOREIGN KEY (productId)
+        REFERENCES products (productId)
+);
+-- List the tables again
+SHOW TABLES;
